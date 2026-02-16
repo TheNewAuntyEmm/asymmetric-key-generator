@@ -36,7 +36,7 @@ program
   )
   .option(
     '-o, --output <filename>',
-    'Output filtpath'
+    'Output filepath'
   )
   .option(
     '-v, --private-key-out <filename>',

@@ -111,21 +111,21 @@ async function promptSaveKeyPairs(
   { count, passphrase } = {}
 ) {
   const options = {
-    title: `Save key pairs`,
+    title: 'Save key pairs',
     defaultPath: `id_${keyType}.tar.gz`,
-    buttonLabel: "Save",
+    buttonLabel: 'Save',
     filters: [
-      { name: "tar.gz", extensions: ["tar.gz"] },
-      { name: "All Files", extensions: ["*"] },
-    ],
-  };
+      { name: 'tar.gz', extensions: ['tar.gz'] },
+      { name: 'All Files', extensions: ['*'] }
+    ]
+  }
 
-  count = count || 1;
+  const totalCount = count || 1
 
-  let remaining = count - keys.length;
+  const remaining = totalCount - keys.length
   if (remaining > 0) {
     for (let i = 0; i < remaining; i++) {
-      keys.push(await generateKeys(keyType, passphrase));
+      keys.push(await generateKeys(keyType, passphrase))
     }
   }
 
@@ -134,16 +134,16 @@ async function promptSaveKeyPairs(
     .then(async ({ canceled, filePath }) => {
       if (!canceled) {
         try {
-          await saveKeys(keys, filePath);
-          return "Key pairs saved";
+          await saveKeys(keys, filePath)
+          return 'Key pairs saved'
         } catch (err) {
-          console.log(err);
-          return `Error. Can not save file ${filePath}`;
+          console.log(err)
+          return `Error. Can not save file ${filePath}`
         }
       } else {
-        console.warn("Save key dialog cancelled");
+        console.warn('Save key dialog cancelled')
       }
-    });
+    })
 
-  return result;
+  return result
 }

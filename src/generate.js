@@ -65,7 +65,11 @@ async function generatePublicKey (privateKey, passphrase) {
     const publickKeyObject = createPublicKey(unencryptedPrivateKey)
     return publickKeyObject.export({ format: 'pem', type: 'spki' })
   } catch (error) {
-    if (error.code === 'ERR_OSSL_BAD_DECRYPT') { return 'Wrong passphrase provided!' } else return ''
+    if (error.code === 'ERR_OSSL_BAD_DECRYPT') {
+      return 'Wrong passphrase provided!'
+    } else {
+      return ''
+    }
   }
 }
 
