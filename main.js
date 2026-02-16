@@ -1,10 +1,7 @@
 const { app, BrowserWindow, ipcMain, clipboard, dialog, nativeImage } = require('electron')
 const { is } = require('electron-util')
-const fs = require('fs');
-const fsp = require('fs').promises;
-const os = require('os');
-const path = require('path');
-const tar = require('tar');
+const fs = require('fs')
+const path = require('path')
 const {
   CHANNEL_GENERATE_KEYS,
   CHANNEL_GENERATE_PUBLIC_KEYS,
