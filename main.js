@@ -9,8 +9,8 @@ const {
   CHANNEL_SAVE_KEY,
   CHANNEL_SAVE_KEY_PAIRS,
   GET_ALL_CHANNELS
-} = require('./shared')
-const { generateKeys, generatePublicKey, saveKeys } = require('./generate')
+} = require('./src/shared')
+const { generateKeys, generatePublicKey, saveKeys } = require('./src/generate')
 
 function createWindow () {
   let options = {
@@ -53,7 +53,7 @@ function createWindow () {
     return result
   })
 
-  mainWindow.loadFile('assets/html/index.html')
+  mainWindow.loadFile('index.html')
 
   // mainWindow.webContents.openDevTools()
 }
@@ -102,7 +102,7 @@ async function promptSaveKey (keyType, key) {
   return result
 }
 
-async function promptSaveKeyPairs (
+async function promptSaveKeyPairs(
   keys = [],
   keyType,
   { count, passphrase } = {}
@@ -117,9 +117,9 @@ async function promptSaveKeyPairs (
     ]
   }
 
-  count = count || 1
+  const totalCount = count || 1
 
-  const remaining = count - keys.length
+  const remaining = totalCount - keys.length
   if (remaining > 0) {
     for (let i = 0; i < remaining; i++) {
       keys.push(await generateKeys(keyType, passphrase))
